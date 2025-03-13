@@ -58,9 +58,9 @@ class Library:
             raise BookNotFoundException(f"{book_title} is not available in the library.")
         member.return_book(book)
 
-# Task 2 Grades
 
 
+# Task 2 
 grades = []
 with open('grades.csv', mode='r') as file:
     reader = csv.DictReader(file)
@@ -83,20 +83,14 @@ with open('average_grades.csv', mode='w', newline='') as file:
     writer.writeheader()
     writer.writerows(averages)
 
+
 # Task 3: 
-
-
 with open('tasks.json', 'r') as file:
     tasks = json.load(file)
-
-
 for task in tasks:
     print(f"ID: {task['id']}, Task: {task['task']}, Completed: {task['completed']}, Priority: {task['priority']}")
-
-
 with open('tasks.json', 'w') as file:
     json.dump(tasks, file, indent=4)
-
 def task_stats(tasks):
     total_tasks = len(tasks)
     completed = sum(1 for task in tasks if task['completed'])
@@ -108,7 +102,6 @@ def task_stats(tasks):
     print(f"Average priority: {avg_priority}")
 
 task_stats(tasks)
-
 def json_to_csv(tasks):
     with open('tasks.csv', mode='w', newline='') as file:
         writer = csv.DictWriter(file, fieldnames=['ID', 'Task', 'Completed', 'Priority'])
