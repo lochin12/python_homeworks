@@ -1,10 +1,9 @@
-
 import sqlite3
 import requests
 import json
 import os
 from bs4 import BeautifulSoup
-# Task 1: Parse Weather Forecast
+
 def parse_weather():
     with open("weather.html", "r", encoding="utf-8") as file:
         soup = BeautifulSoup(file, "html.parser")
@@ -17,11 +16,10 @@ def parse_weather():
         day, temp, condition = cols[0].text, int(cols[1].text[:-2]), cols[2].text
         weather_data.append((day, temp, condition))
     
-    # Print weather data
+
     for entry in weather_data:
         print(entry)
     
-    # Find max temp & sunny days
     max_temp = max(weather_data, key=lambda x: x[1])
     sunny_days = [day for day, _, cond in weather_data if cond == "Sunny"]
     avg_temp = sum(temp for _, temp, _ in weather_data) / len(weather_data)
@@ -30,7 +28,7 @@ def parse_weather():
     print("Sunny days:", sunny_days)
     print("Average temperature:", avg_temp)
 
-# Task 2: Scrape Job Listings
+#Task 2
 def scrape_jobs():
     url = "https://realpython.github.io/fake-jobs"
     response = requests.get(url)
@@ -70,7 +68,7 @@ def scrape_jobs():
     conn.close()
     print(f"New jobs added: {len(new_jobs)}")
 
-# Export jobs to CSV
+
 def export_jobs(filter_by="", value=""):
     conn = sqlite3.connect("jobs.db")
     cursor = conn.cursor()
@@ -88,7 +86,7 @@ def export_jobs(filter_by="", value=""):
             file.write(",".join(job) + "\n")
     print("Jobs exported to jobs.csv")
 
-# Task 3: Scrape Laptop Data
+#Task 3
 def scrape_laptops():
     url = "https://www.demoblaze.com/"
     response = requests.get(url)
